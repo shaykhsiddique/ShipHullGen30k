@@ -698,7 +698,7 @@ class ShipHullProcessorPreloaded(ShipHullProcessor):
 
         return self._vec, self._x_labels
 
-    def run_all_from_npy(self, stl_limit: int = 1000) -> None:
+    def run_all(self, stl_limit: int = 1000) -> None:
         self.ensure_directories()
         self.create_csv_from_npy()
         self.benchmark_one_geometry_run()
@@ -734,31 +734,31 @@ def main() -> None:
     Example 1:
     Use existing CSV directly
     """
-    # processor = ShipHullProcessor(
-    #     ds_path="./",
-    #     input_vector_csv="Input_Vectors_SampleHulls.csv",
-    #     geometry_dir="GeometricMeasures",
-    #     stl_dir="stl",
-    #     chunksize=4,
-    # )
-    # processor.run_all(stl_limit=1000)
+    processor = ShipHullProcessor(
+        ds_path="./",
+        input_vector_csv="Input_Vectors_SampleHulls.csv",
+        geometry_dir="GeometricMeasures",
+        stl_dir="stl",
+        chunksize=4,
+    )
+    processor.run_all(stl_limit=1000)
 
     """
     Example 2:
     Create CSV from NPY first, then run everything
     """
 
-    preloaded_processor = ShipHullProcessorPreloaded(
-        ds_path="./",
-        input_vector_file="InputVectors_30k.npy",
-        x_labels_file="X_LABELS.npy",
-        output_csv="Input_Vectors.csv",
-        num_samples=15,
-        geometry_dir="GeometricMeasures",
-        stl_dir="stl",
-        chunksize=4,
-    )
-    preloaded_processor.run_all_from_npy(stl_limit=1000)
+    # preloaded_processor = ShipHullProcessorPreloaded(
+    #     ds_path="./",
+    #     input_vector_file="InputVectors_30k.npy",
+    #     x_labels_file="X_LABELS.npy",
+    #     output_csv="Input_Vectors.csv",
+    #     num_samples=5,
+    #     geometry_dir="GeometricMeasures",
+    #     stl_dir="stl",
+    #     chunksize=4,
+    # )
+    # preloaded_processor.run_all(stl_limit=1000)
     
 
 
